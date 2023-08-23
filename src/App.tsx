@@ -1,35 +1,13 @@
-import { useQuery } from "@tanstack/react-query";
+import HomePage from "./pages/HomePage";
 
 function App() {
-  const uri = `https://restcountries.com/v3.1/all`;
-
-  const { isLoading, error, data } = useQuery({
-    queryKey: [uri],
-    queryFn: async () => {
-      const response = await fetch(uri, {
-        method: "GET",
-        mode: "cors",
-      });
-
-      return await response.json();
-    },
-  });
-
-  if (isLoading) {
-    return <pre>{`Loading...`}</pre>;
-  }
-
-  if (error) {
-    return (
-      <pre>{`Oops.. Something went wrong: ${JSON.stringify(
-        error,
-        null,
-        2,
-      )}`}</pre>
-    );
-  }
-
-  return <pre>{JSON.stringify(data, null, 2)}</pre>;
+  return (
+    <div className="w-full h-screen min-w-full min-h-screen max-w-full overflow-x-hidden overflow-y-auto">
+      <div className="w-full flex flex-col items-center justify-start p-3">
+        <HomePage />
+      </div>
+    </div>
+  );
 }
 
 export default App;
